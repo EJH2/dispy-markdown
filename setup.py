@@ -20,6 +20,6 @@ setuptools.setup(
     python_requires='>=3.8',
     install_requires=[
         'pygments==2.7.2',
-        'git+https://github.com/EJH2/simpy-markdown.git'
+        'simpy_markdown @ git+https://github.com/EJH2/simpy-markdown.git'
     ]
 )
