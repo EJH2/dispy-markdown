@@ -54,7 +54,7 @@ class CodeBlock(md.default_classes['code_block']):
 
     @staticmethod
     def match(*args, **kwargs):
-        return md.inline_regex(r'^```(([a-z0-9-]+?)\n+)?\n*([\S\s]+?)\n*```', flags=re.IGNORECASE)
+        return md.inline_regex(r'^```(([a-z0-9-]+?)\n+)?\n*([\S\s]+?)\n*```', flags=re.IGNORECASE)(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -130,7 +130,7 @@ class Strike(md.default_classes['del']):
 
     @staticmethod
     def match(*args, **kwargs):
-        return md.inline_regex(r'^~~([\s\S]+?)~~(?!_)')
+        return md.inline_regex(r'^~~([\s\S]+?)~~(?!_)')(*args, **kwargs)
 
 
 class InlineCode(md.default_classes['inline_code']):
@@ -180,7 +180,7 @@ class Br(md.default_classes['br']):
 
     @staticmethod
     def match(*args, **kwargs):
-        return md.any_scope_regex(r'^\n')
+        return md.any_scope_regex(r'^\n')(*args, *kwargs)
 
 
 class Spoiler(md.Rule):
