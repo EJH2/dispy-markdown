@@ -18,7 +18,7 @@ def html_tag(tag_name: str, content: str, attributes: dict = None, is_closed: bo
         f'{md.sanitize_text(attr)}="{md.sanitize_text(attributes[attr])}"' for attr in attributes if attributes[attr]
     )
 
-    unclosed_tag = f'<{tag_name} {attr_string}>'
+    unclosed_tag = f'<{tag_name}{ " " + attr_string if attr_string else ""}>'
 
     if is_closed:
         return unclosed_tag + content + f'</{tag_name}>'
