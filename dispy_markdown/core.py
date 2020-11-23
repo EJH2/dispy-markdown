@@ -33,7 +33,7 @@ class BlockQuote(md.default_classes['block_quote']):
     @staticmethod
     def match(source, state, previous_source, *args, **kwargs):
         return None if (not re.search(r'^$|\n *$', previous_source) or state.get('in_quote')) else \
-            md.any_scope_regex(r'^( *>>> ([\s\S]*))|^( *> [^\n]*(\n *> [^\n]*)*\n?)')(*args, **kwargs)
+            md.any_scope_regex(r'^( *>>> ([\s\S]*))|^( *> [^\n]*(\n *> [^\n]*)*\n?)')(source, state)
 
     @staticmethod
     def parse(capture, parse, state):
