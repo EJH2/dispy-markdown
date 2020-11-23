@@ -33,7 +33,7 @@ class BlockQuote(md.default_classes['block_quote']):
     @staticmethod
     def match(source, state, previous_source, *args, **kwargs):
         return None if (not re.search(r'^$|\n *$', previous_source) or state.get('in_quote')) else \
-            re.search(r'^( *>>> ([\s\S]*))|^( *> [^\n]*(\n *> [^\n]*)*\n?)', source)
+            md.any_scope_regex(r'^( *>>> ([\s\S]*))|^( *> [^\n]*(\n *> [^\n]*)*\n?)')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -135,8 +135,8 @@ class Strike(md.default_classes['del']):
 class InlineCode(md.default_classes['inline_code']):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^(`+)([\s\S]*?[^`])\1(?!`)', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^(`+)([\s\S]*?[^`])\1(?!`)')(*args, **kwargs)
 
     @staticmethod
     def html(node, output, state):
@@ -146,8 +146,8 @@ class InlineCode(md.default_classes['inline_code']):
 class Text(md.default_classes['text']):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^[\s\S]+?(?=[^0-9A-Za-z\s\u00c0-\uffff-]|\n\n|\n|\w+:\S|$)', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^[\s\S]+?(?=[^0-9A-Za-z\s\u00c0-\uffff-]|\n\n|\n|\w+:\S|$)')(*args, **kwargs)
 
     @staticmethod
     def html(node, output, state):
@@ -160,8 +160,8 @@ class Text(md.default_classes['text']):
 class Emoticon(md.Rule):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^(¯\\_\(ツ\)_/¯)', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^(¯\\_\(ツ\)_/¯)')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -185,8 +185,8 @@ class Br(md.default_classes['br']):
 class Spoiler(md.Rule):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^\|\|([\s\S]+?)\|\|', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^\|\|([\s\S]+?)\|\|')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -230,8 +230,8 @@ discord_callback_defaults = {
 class DiscordUser(md.Rule):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^<@!?([0-9]*)>', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^<@!?([0-9]*)>')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -247,8 +247,8 @@ class DiscordUser(md.Rule):
 class DiscordChannel(md.Rule):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^<#?([0-9]*)>', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^<#?([0-9]*)>')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -264,8 +264,8 @@ class DiscordChannel(md.Rule):
 class DiscordRole(md.Rule):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^<@&([0-9]*)>', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^<@&([0-9]*)>')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -281,8 +281,8 @@ class DiscordRole(md.Rule):
 class DiscordEmoji(md.Rule):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^<(a?):(\w+):(\d+)>', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^<(a?):(\w+):(\d+)>')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -304,8 +304,8 @@ class DiscordEmoji(md.Rule):
 class DiscordEveryone(md.Rule):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^@everyone', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^@everyone')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
@@ -319,8 +319,8 @@ class DiscordEveryone(md.Rule):
 class DiscordHere(md.Rule):
 
     @staticmethod
-    def match(source, *args, **kwargs):
-        return re.search(r'^@here', source)
+    def match(*args, **kwargs):
+        return md.any_scope_regex(r'^@here')(*args, **kwargs)
 
     @staticmethod
     def parse(capture, parse, state):
