@@ -216,7 +216,7 @@ rules = {
     'br': Br(md.default_rules['br'].order),
     'spoiler': Spoiler(0)
 }
-
+classes = {key: item.__class__ for key, item in rules.items()}
 
 discord_callback_defaults = {
     'user': lambda node: '@' + md.sanitize_text(node['id']),
@@ -339,12 +339,16 @@ rules_discord = {
     'discord_everyone': DiscordEveryone(md.default_rules['strong'].order),
     'discord_here': DiscordHere(md.default_rules['strong'].order),
 }
+classes_discord = {key: item.__class__ for key, item in rules_discord.items()}
 
 rules.update(rules_discord)
+classes.update(classes_discord)
 
 rules_discord_only = {**rules_discord, 'text': Text(md.default_rules['text'].order)}
+classes_discord_only = {key: item.__class__ for key, item in rules_discord_only.items()}
 
 rules_embed = {**rules, 'link': md.default_rules['link']}
+classes_embed = {key: item.__class__ for key, item in rules_embed.items()}
 
 parser = md.parser_for(rules)
 html_output = md.output_for(rules, 'html')
