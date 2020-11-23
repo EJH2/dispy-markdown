@@ -10,7 +10,7 @@ setuptools.setup(
     description="discord-markdown, but Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/EJH2/simpy-markdown",
+    url="https://github.com/EJH2/dispy-markdown",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -18,4 +18,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.8',
+    install_requires=[
+        'pygments==2.7.2',
+        'git+https://github.com/EJH2/simpy-markdown.git'
+    ]
 )
