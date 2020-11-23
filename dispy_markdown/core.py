@@ -76,7 +76,7 @@ class CodeBlock(md.default_classes['code_block']):
                           )
 
         return html_tag('pre', html_tag(
-            'code', code if code else md.sanitize_text(node.content), {
+            'code', code if code else md.sanitize_text(node['content']), {
                 'class': f'hljs{" " + node["lang"] if code else ""}'
             }, state
         ), None, state)
