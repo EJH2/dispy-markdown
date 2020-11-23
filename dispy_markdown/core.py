@@ -9,6 +9,9 @@ from pygments.lexers import get_lexer_by_name
 
 def html_tag(tag_name: str, content: str, attributes: dict = None, is_closed: bool = True, state: dict = None) -> str:
     attributes = attributes or {}
+    if isinstance(is_closed, dict):
+        state = is_closed
+        is_closed = True
     state = state or {}
 
     if attributes.get('class') and state.get('css_module_names'):
