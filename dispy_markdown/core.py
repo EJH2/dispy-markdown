@@ -118,8 +118,7 @@ class URL(md.default_classes['url']):
 
 class Em(md.default_classes['em']):
 
-    @staticmethod
-    def parse(capture, parse, state):
+    def parse(self, capture, parse, state):
         _state = state.copy()
         _state['in_emphasis'] = True
         parsed = super().parse(capture, parse, _state)
