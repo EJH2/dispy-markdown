@@ -28,7 +28,7 @@ def html_tag(tag_name: str, content: str, attributes: dict = None, is_closed: bo
 md.html_tag = html_tag
 
 
-class BlockQuote(md.default_classes['blockquote']):
+class BlockQuote(md.default_classes['block_quote']):
 
     @staticmethod
     def match(source, state, previous_source, *args, **kwargs):
