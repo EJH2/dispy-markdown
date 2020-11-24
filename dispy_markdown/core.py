@@ -45,10 +45,9 @@ class BlockQuote(md.default_classes['block_quote']):
         remove_syntax_regex = r'^ *>>> ?' if is_block else r'^ *> ?'
         _regex_settings = {'flags': re.MULTILINE, 'count': 0} if not is_block else {'count': 1}
         content = re.sub(remove_syntax_regex, '', all_, **_regex_settings)
-        state['in_quote'] = True
 
         return {
-            'content': parse(content, state),
+            'content': parse(content, {**state, 'in_quote': True}),
             'type': 'block_quote'
         }
 
